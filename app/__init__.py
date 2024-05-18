@@ -7,7 +7,7 @@ from flask_restful import Api
 from flask_swagger_ui import get_swaggerui_blueprint
 
 # import resources
-from .auth.auth import AuthBase
+from .auth.auth import CasdoorAuthBase
 from .auth.login import Login
 
 def create_app():
@@ -36,7 +36,7 @@ def create_app():
     api = Api(app)
     with app.app_context():
         # Initialize AuthBase and attach it to the application context
-        app.auth_base = AuthBase()
+        app.auth_base = CasdoorAuthBase()
 
     # add resources
     api.add_resource(Login, '/auth/login')
