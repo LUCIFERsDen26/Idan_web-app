@@ -1,6 +1,7 @@
 # config.py
 import os
 from dotenv import load_dotenv
+import logging
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
@@ -19,7 +20,7 @@ class DevelopmentConfig(Config):
     SWAGGER_URL = '/swagger'
     API_URL = '/static/swagger.yml'  # Path to API specification
     APP_NAME = "IdanMotor"
-
+    logging.basicConfig(level=logging.INFO)
 
 class ProductionConfig(Config):
     ENV = "production"
