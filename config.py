@@ -17,9 +17,6 @@ class DevelopmentConfig(Config):
     ENV = "development"
     DEBUG = '1'
     REQUEST_SESSION = False
-    SWAGGER_URL = '/swagger'
-    API_URL = '/static/swagger.yml'  # Path to API specification
-    APP_NAME = "IdanMotor"
     logging.basicConfig(level=logging.INFO)
 
 class ProductionConfig(Config):
