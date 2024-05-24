@@ -1,28 +1,46 @@
 # app/__init__.py
 
+# Import necessary modules
 import os
+from redis import Redis
 from flask import Flask
+from flask_session import Session
+from flask_session.redis import RedisSessionInterface
 
-# Import and register the auth blueprint
+# Import blueprints
 from .auth import auth_bp, CasdoorAuthBase
 from .index import index_bp
 
+
 def create_app():
+    """
+    Create and configure the Flask application.
+
+    Returns:
+        Flask: The Flask application.
+    """
+    # Create the Flask application
     app = Flask(__name__)
+
+    # Set the secret key for the application
     app.secret_key = 'my_secret_key'
 
+    # Load the configuration from the environment
     environment_configuration = os.environ['CONFIGURATION_SETUP']
     app.config.from_object(environment_configuration)
-    os.environ['FLASK_DEBUG'] =  app.config['DEBUG']
+    os.environ['FLASK_DEBUG'] = app.config['DEBUG']
+
+    # Configure the Redis session interface
+    redis = Redis(host='localhost', port=6379)
+    app.session_interface = RedisSessionInterface(client=redis)
 
     # Create an instance of the CasdoorAuthBase class and attach it to the application context
     with app.app_context():
         app.auth_base = CasdoorAuthBase()
 
-    # Register the auth blueprint with the Flask app
+    # Register the blueprints
     app.register_blueprint(auth_bp)
-
-    # Register the index blueprint with the Flask app
     app.register_blueprint(index_bp)
 
+    # Return the Flask application
     return app
