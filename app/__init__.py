@@ -1,10 +1,11 @@
 # app/__init__.py
 
 import os
-from flask import Flask, session, current_app
-from flask_swagger_ui import get_swaggerui_blueprint
+from flask import Flask
+
 # Import and register the auth blueprint
 from .auth import auth_bp, CasdoorAuthBase
+from .index import index_bp
 
 def create_app():
     app = Flask(__name__)
@@ -20,5 +21,8 @@ def create_app():
 
     # Register the auth blueprint with the Flask app
     app.register_blueprint(auth_bp)
+
+    # Register the index blueprint with the Flask app
+    app.register_blueprint(index_bp)
 
     return app
