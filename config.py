@@ -18,6 +18,11 @@ class DevelopmentConfig(Config):
     DEBUG = '1'
     REQUEST_SESSION = False
     logging.basicConfig(level=logging.INFO)
+    SESSION_TYPE = 'redis'
+    SESSION_PERMANENT = False
+    SESSION_USE_SIGNER = True
+    import redis
+    SESSION_REDIS = redis.from_url('redis://127.0.0.1:6379')
 
 class ProductionConfig(Config):
     ENV = "production"
