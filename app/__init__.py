@@ -5,7 +5,7 @@ import os
 from redis import Redis
 from flask import Flask
 from flask_session import Session
-from flask_session.redis import RedisSessionInterface
+
 
 # Import blueprints
 from .auth import auth_bp, CasdoorAuthBase
@@ -23,7 +23,7 @@ def create_app():
     app = Flask(__name__)
 
     # Set the secret key for the application
-    app.secret_key = 'my_secret_key'
+    app.secret_key = os.environ['SECRET_KEY']
 
     # Load the configuration from the environment
     environment_configuration = os.environ['CONFIGURATION_SETUP']
@@ -31,8 +31,10 @@ def create_app():
     os.environ['FLASK_DEBUG'] = app.config['DEBUG']
 
     # Configure the Redis session interface
-    redis = Redis(host='localhost', port=6379)
-    app.session_interface = RedisSessionInterface(client=redis)
+    #app.session_interface = RedisSessionInterface(client=app.config['SESSION_REDIS'])
+
+    # Create and initialize the Flask-Session object AFTER `app` has been configured
+    server_session = Session(app)
 
     # Create an instance of the CasdoorAuthBase class and attach it to the application context
     with app.app_context():
