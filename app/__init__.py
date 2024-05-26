@@ -8,8 +8,8 @@ from flask_session import Session
 
 
 # Import blueprints
-from .auth import auth_bp, CasdoorAuthBase
-from .index import index_bp
+from .routes.auth import auth_bp, CasdoorAuthBase
+from .routes.index import index_bp
 
 
 def create_app():
