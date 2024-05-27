@@ -16,9 +16,8 @@ def logout():
     
     if 'access_token' not in session:
         logging.error('user not logged in yet.')
-        flash('please login first')
-        
-        return "<a href='/auth/login'>Login</a></br><p>click on login button </p>"
+        flash('login first')
+        return "<a href='/'>Home</a></br><a href='/auth/login'>Login</a></br><p>click on login button </p>"
 
     logging.info('user has toekn in session')
     
@@ -30,7 +29,11 @@ def logout():
                 del session[key]
             logging.info('user has been logged out successfully')
             flash('You were successfully logged out')
-            return "<a herf='/'>Home</a><br><a href='/auth/login'>Login</a></br><p> logged out ok</p>"      
+            return "<a href='/'>Home</a>\
+                    <br>\
+                    <a href='/auth/login'>Login</a>\
+                    </br>\
+                    <p> logged out ok</p>"      
 
     except Exception as e:
         logging.info('user has not been logged out successfully')
