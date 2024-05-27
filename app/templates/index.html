@@ -2,20 +2,25 @@
 <html>
 <head>
     <title>Idan Motor</title>
+    <!-- ... your other head elements ... -->
+</head>
+<body>
+    <h1>Index Page</h1>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/logout">Logout</a>
+    <a href="{{ url_for('index_bp.chekcsession') }}">insession</a>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <ul class=flashes>
+            <ul class="flashes">
             {% for message in messages %}
                 <li>{{ message }}</li>
             {% endfor %}
             </ul>
         {% endif %}
     {% endwith %}
-{% block body %}{% endblock %}
-</head>
-<body>
-    <h1>Index Page</h1>
-    <button onclick="window.location.href='/auth/login'">Login</button>
-    <button onclick="window.location.href='/auth/logout'">Logout</button>
+
+    {% block body %}{% endblock %}
+
 </body>
 </html>

@@ -22,7 +22,7 @@ class DevelopmentConfig(Config):
     SESSION_PERMANENT = False
     SESSION_USE_SIGNER = True
     import redis
-    SESSION_REDIS = redis.from_url('redis://127.0.0.1:6379')
+    SESSION_REDIS = redis.from_url('redis://host.docker.internal:6379')
 
 class ProductionConfig(Config):
     ENV = "production"

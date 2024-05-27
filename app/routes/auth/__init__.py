@@ -20,10 +20,11 @@ class CasdoorAuthBase:
     def __init__(self):
 
         self.client_id = os.environ['CLIENT_ID']
+        
         self.client_certs = str(os.environ['CLIENT_CERTS'])
 
-        openID = Utils.fetch_url_data("http://localhost:8000/.well-known/openid-configuration")
-
+        openID = Utils.fetch_url_data("http://host.docker.internal:8000/.well-known/openid-configuration")
+        
         self.signing_algos = openID["id_token_signing_alg_values_supported"]
         self.authorization_endpoint = openID['authorization_endpoint']
         self.token_endpoint = openID['token_endpoint']
@@ -36,8 +37,8 @@ class CasdoorAuthBase:
                             endpoint=openID['issuer'],
                             client_id=self.client_id,
                             certificate=self.client_certs,
-                            org_name="IdanMotor",
-                            application_name="Idan_FrontEnd",
+                            org_name="built-in",
+                            application_name="test",
                             client_secret=None,
-                            front_endpoint="http://0.0.0.0:8000",
+                            front_endpoint="http://host.docker.internal:8000",
                       )
