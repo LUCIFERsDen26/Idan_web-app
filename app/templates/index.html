@@ -2,10 +2,20 @@
 <html>
 <head>
     <title>Idan Motor</title>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% block body %}{% endblock %}
 </head>
 <body>
     <h1>Index Page</h1>
     <button onclick="window.location.href='/auth/login'">Login</button>
-    
+    <button onclick="window.location.href='/auth/logout'">Logout</button>
 </body>
 </html>
