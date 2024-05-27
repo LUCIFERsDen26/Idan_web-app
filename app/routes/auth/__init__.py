@@ -1,17 +1,20 @@
 # auth/__init__.py
 from casdoor import CasdoorSDK
 import os
-from .utils import Utils
-
 from flask import Blueprint
+
 from .resource.login import login_bp
 from .resource.callback import callback_bp
+from .resource.logout import logout_bp
 
+from .utils import Utils
 auth_bp = Blueprint('auth_bp', __name__, url_prefix='/auth')
 
 # Register the login and callback blueprints with the auth blueprint
 auth_bp.register_blueprint(login_bp)
 auth_bp.register_blueprint(callback_bp)
+auth_bp.register_blueprint(logout_bp)
+
 
 class CasdoorAuthBase:
     def __init__(self):
