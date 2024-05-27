@@ -23,7 +23,7 @@ def create_app():
     app = Flask(__name__)
 
     # Set the secret key for the application
-    app.secret_key = os.environ['SECRET_KEY']
+    app.secret_key = app.config['SECRET_KEY']
 
     # Load the configuration from the environment
     environment_configuration = os.environ['CONFIGURATION_SETUP']
