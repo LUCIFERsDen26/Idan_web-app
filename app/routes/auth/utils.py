@@ -6,7 +6,7 @@ from typing import Any, Dict, Optional, Tuple
 import secrets
 import hashlib
 import base64
-
+import os
 from flask import  current_app
 from typing import Optional
 import logging
@@ -80,3 +80,41 @@ class Utils:
         except Exception as e:
             logging.error('Error while generating payload: %s', e)
             raise
+            
+
+    @staticmethod
+    def logout_from_casdoor(access_token: str, certs_string: Optional[str] = os.environ['CLIENT_CERTS']) -> bool:
+        """Logs out of Casdoor using the provided access token.
+
+        Args:
+            access_token (str): The access token to invalidate.
+            certs_string (Optional[str]): PEM-encoded certificate string for HTTPS verification.
+                Defaults to None, which disables certificate verification.
+
+        Returns:
+            bool: True if the logout request was successful, False otherwise.
+        """
+
+        url = "http://0.0.0.0:8000/api/logout"
+        headers = {"Authorization": f"Bearer {access_token}"}
+        """
+        if certs_string:
+            try:
+                # Decode the certificate string from base64
+                certs = base64.b64decode(certs_string.encode("utf-8")).decode("utf-8")
+            except (ValueError, UnicodeDecodeError) as e:
+                print(f"Error: Invalid certificate string: {e}")
+                return False
+        else:
+            # Disable certificate verification (not recommended for production)
+            print("Warning: HTTPS certificate verification is disabled.")
+            certs = None
+        """
+        try:
+            response = requests.get(url, headers=headers, verify=False)
+            response.raise_for_status()  # Raise an exception for non-2xx status codes
+            return True
+        except requests.exceptions.RequestException as e:
+            print(f"Error: Logout request failed: {e}")
+            return False
+
