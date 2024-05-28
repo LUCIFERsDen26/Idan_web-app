@@ -17,7 +17,7 @@ def logout():
     if 'access_token' not in session:
         logging.error('user not logged in yet.')
         flash('login first')
-        return "<a href='/'>Home</a></br><a href='/auth/login'>Login</a></br><p>click on login button </p>"
+        return "<a href='/'>Home</a></br><p>click on login button </p>"
 
     logging.info('user has toekn in session')
     
@@ -26,12 +26,12 @@ def logout():
         status = Utils.logout_from_casdoor(access_token=session['access_token'])       
         if status:
             for key in session.keys():
+                session.delete(key)
                 del session[key]
+
             logging.info('user has been logged out successfully')
             flash('You were successfully logged out')
             return "<a href='/'>Home</a>\
-                    <br>\
-                    <a href='/auth/login'>Login</a>\
                     </br>\
                     <p> logged out ok</p>"      
 
