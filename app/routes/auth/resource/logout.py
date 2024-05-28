@@ -10,9 +10,7 @@ logout_bp = Blueprint('logout_bp', __name__)
 def logout():   
     
     # Get the authorization code and state from the request
-    session = current_app.config['SESSION_REDIS']
-    for key in session.keys():
-        print(f"key: {key} ,value: {session[key]}\n")
+    session = current_app.config['SESSION_REDIS']    
     
     if 'access_token' not in session:
         logging.error('user not logged in yet.')
@@ -41,7 +39,3 @@ def logout():
         return jsonify({'error': 'An error occurred while processing the callback'}), 500
 
     return {'error': 'An error occurred while processing the callback'}, 500
-   
-"""
-curl -X GET   http://0.0.0.0:8000/api/logout   -H "Authorization: Bearer eyJhbGciOiJSUzI1
-"""
