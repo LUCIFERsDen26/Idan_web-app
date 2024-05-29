@@ -6,8 +6,6 @@ from .resource.stats import stats_bp
 from .resource.control import control_bp
 from .resource.info import info_bp
 
-
-from .utils import Utils
 battery_bp = Blueprint('battery_bp', __name__, url_prefix='/battery')
 
 # Register the login and callback blueprints with the auth blueprint
