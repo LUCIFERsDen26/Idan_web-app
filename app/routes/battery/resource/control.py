@@ -23,7 +23,7 @@ def battery_control():
             return jsonify({"error": "Missing access token"}), 401  # Unauthorized
 
         param = get_battery_settings(access_token)
-        print(param)
+        
         return render_template('control.html', parms=param)
 
     except Exception as e:
