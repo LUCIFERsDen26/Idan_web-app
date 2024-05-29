@@ -5,8 +5,11 @@ from flask import Blueprint, render_template, current_app
 index_bp = Blueprint('index_bp', __name__)
 
 @index_bp.route('/')
-def index():    
-    return render_template('index.html')
+def index():
+    session = current_app.config['SESSION_REDIS']
+    if 'access_token' in session:
+        return render_template('index.html',show=True)    
+    return render_template('index.html', show= False)
 
 @index_bp.route('/insession')
 def chekcsession():
