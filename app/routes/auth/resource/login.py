@@ -20,6 +20,6 @@ def login():
         
         session['code_verifier'] = code_verifier
         session['code_challenge'] = code_challenge
-        
+        uri = uri.replace("host.docker.internal", "localhost")
         return redirect(uri)
 
