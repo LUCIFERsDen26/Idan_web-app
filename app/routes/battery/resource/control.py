@@ -24,7 +24,7 @@ def battery_control():
 
         param = get_battery_settings(access_token)
         
-        return render_template('control.html', parms=param)
+        return render_template('batterypages/control.html', parms=param)
 
     except Exception as e:
         logging.error(f"Error retrieving battery info: {str(e)}")

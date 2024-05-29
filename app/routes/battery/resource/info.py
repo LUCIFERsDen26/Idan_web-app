@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, jsonify
+from flask import Blueprint, current_app, jsonify, render_template
 from ..utils import get_battery_info
 import logging
 
@@ -12,7 +12,7 @@ def battery_info():
         access_token = session['access_token']       
         response = get_battery_info(access_token)
         if response:
-            return jsonify(response)
+            return render_template('batterypages/info.html', data=response)
         else:
             return jsonify({"error": "Invalid battery ID"})
         

@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, jsonify
+from flask import Blueprint, current_app, render_template, flash
 from ..utils import get_battery_stats
 import logging
 
@@ -11,11 +11,14 @@ def battery_stats():
         # Get access token and bike ID from request
         access_token = session['access_token']       
         response = get_battery_stats(access_token)
+        print("no error")
         if response:
-            return jsonify(response)
+            return render_template('batterypages/stats.html', data=response)
         else:
-            return jsonify({"error": "Invalid battery ID"})
+            flash( "Invalid battery ID")
+            return "<p>Invalid battery ID</p>"
         
     except Exception as e:
         logging.error(f"Error in get_battery_stats: {str(e)}")
-        return jsonify({"error": str(e)})
+        flash("error")
+        return "<p>error</p>"
