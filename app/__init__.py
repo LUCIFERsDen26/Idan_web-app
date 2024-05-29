@@ -10,7 +10,7 @@ from flask_session import Session
 # Import blueprints
 from .routes.auth import auth_bp, CasdoorAuthBase
 from .routes.index import index_bp
-
+from .routes.battery import battery_bp
 
 def create_app():
     """
@@ -30,9 +30,6 @@ def create_app():
     app.config.from_object(environment_configuration)
     os.environ['FLASK_DEBUG'] = app.config['DEBUG']
 
-    # Configure the Redis session interface
-    #app.session_interface = RedisSessionInterface(client=app.config['SESSION_REDIS'])
-
     # Create and initialize the Flask-Session object AFTER `app` has been configured
     server_session = Session(app)
 
@@ -43,6 +40,6 @@ def create_app():
     # Register the blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(index_bp)
-
+    app.register_blueprint(battery_bp)
     # Return the Flask application
     return app
