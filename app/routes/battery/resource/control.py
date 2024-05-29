@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, jsonify, render_template, request
+from flask import Blueprint, current_app, jsonify, render_template, request, flash, redirect
 from ..utils import get_battery_settings, set_battery_settings
 import logging
 
@@ -54,7 +54,11 @@ def update_battery_params():
         # ...
 
         response = set_battery_settings(access_token, data)
-        return response
+        if response:
+            flash("Battery settings updated successfully, new values are placed in corresponding placeholders")
+        else:
+            flash("Invalid battery ID")
+        return redirect('/battery/control')
 
     except Exception as e:
         logging.error(f"Error updating battery settings: {str(e)}")
