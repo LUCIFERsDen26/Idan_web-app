@@ -38,7 +38,7 @@ class CasdoorAuthBase:
                             client_id=self.client_id,
                             certificate=self.client_certs,
                             org_name="IdanMotor",
-                            application_name="danmotor",
+                            application_name="idanmotor",
                             client_secret=None,
                             front_endpoint="http://host.docker.internal:8000",
                       )
