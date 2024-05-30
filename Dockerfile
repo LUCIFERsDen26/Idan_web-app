@@ -4,6 +4,9 @@ FROM python:3.10
 # Set the working directory in the container to /app
 WORKDIR /app
 
+# Copy the current directory contents into the container at /app
+COPY . .
+
 # Set an environment variable
 ENV MY_ENV_VARIABLE=value
 
@@ -17,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # USER nonroot
 
 # [Optional] If you want to forward ports, use the EXPOSE instruction to indicate which ports should be exposed
-# EXPOSE your_port_number
+EXPOSE 5000
 
 # Define the default command to run when starting the container
-CMD ["python3"]
+CMD ["flask run"]
