@@ -5,7 +5,7 @@ FROM python:3.10
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . .
+COPY . /app
 
 # Set an environment variable
 ENV MY_ENV_VARIABLE=value
@@ -16,11 +16,8 @@ COPY requirements.txt .
 # Install the Python dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# [Optional] Uncomment this line if you need to run the container as a non-root user
-# USER nonroot
-
 # [Optional] If you want to forward ports, use the EXPOSE instruction to indicate which ports should be exposed
 EXPOSE 5000
 
 # Define the default command to run when starting the container
-CMD ["flask run"]
+CMD ["python", "-m", "flask", "run"]
