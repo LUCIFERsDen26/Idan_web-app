@@ -94,8 +94,8 @@ class Utils:
         Returns:
             bool: True if the logout request was successful, False otherwise.
         """
-
-        url = "http://host.docker.internal:8000/api/logout"
+        auth = current_app.auth_base
+        url = auth.end_session_endpoint
         headers = {"Authorization": f"Bearer {access_token}"}
         """
         if certs_string:

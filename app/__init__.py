@@ -26,7 +26,7 @@ def create_app():
     app.secret_key = app.config['SECRET_KEY']
 
     # Load the configuration from the environment
-    environment_configuration = os.environ['CONFIGURATION_SETUP']
+    environment_configuration = os.environ['APP_CONFIGURATION_SETUP']
     app.config.from_object(environment_configuration)
     os.environ['FLASK_DEBUG'] = app.config['DEBUG']
 

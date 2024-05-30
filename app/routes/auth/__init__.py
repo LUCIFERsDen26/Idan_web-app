@@ -22,13 +22,13 @@ class CasdoorAuthBase:
         self.client_id = os.environ['CLIENT_ID']
         
         self.client_certs = str(os.environ['CLIENT_CERTS'])
-
-        openID = Utils.fetch_url_data("http://host.docker.internal:8000/.well-known/openid-configuration")
+                                
+        openID = Utils.fetch_url_data(os.environ['CASDOOR_OPENID_CONFIG_URL'])
         
         self.signing_algos = openID["id_token_signing_alg_values_supported"]
         self.authorization_endpoint = openID['authorization_endpoint']
         self.token_endpoint = openID['token_endpoint']
-
+        self.end_session_endpoint = openID['end_session_endpoint']
         self.scope = 'openid email phone phone'
 
         self.redirect_uri = "http://127.0.0.1:5000/callback"
@@ -37,8 +37,7 @@ class CasdoorAuthBase:
                             endpoint=openID['issuer'],
                             client_id=self.client_id,
                             certificate=self.client_certs,
-                            org_name="IdanMotor",
-                            application_name="idanmotor",
-                            client_secret=None,
-                            front_endpoint="http://host.docker.internal:8000",
+                            org_name=os.environ['ORG_NAME'],
+                            application_name=os.environ['APPLICATION_NAME'],
+                            front_endpoint=os.environ['FRONT_ENDPOINT'],
                       )
