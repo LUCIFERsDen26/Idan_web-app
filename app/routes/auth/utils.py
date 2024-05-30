@@ -83,7 +83,7 @@ class Utils:
             
 
     @staticmethod
-    def logout_from_casdoor(access_token: str, certs_string: Optional[str] = os.environ['CLIENT_CERTS']) -> bool:
+    def logout_from_casdoor(access_token: str, certs_string: Optional[str] = os.environ['CASDOOR_CLIENT_CERTS']) -> bool:
         """Logs out of Casdoor using the provided access token.
 
         Args:
@@ -96,6 +96,7 @@ class Utils:
         """
         auth = current_app.auth_base
         url = auth.end_session_endpoint
+        
         headers = {"Authorization": f"Bearer {access_token}"}
         """
         if certs_string:
