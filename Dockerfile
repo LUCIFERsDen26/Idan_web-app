@@ -7,9 +7,6 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Set an environment variable
-ENV MY_ENV_VARIABLE=value
-
 # Copy the requirements.txt file from your host to the container's working directory
 COPY requirements.txt .
 
