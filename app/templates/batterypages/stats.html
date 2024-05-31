@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battery Information</title>
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% block body %}{% endblock %}
+  <style>
+    /* Optional CSS for styling the table (customize as needed) */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Battery Information</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key, value in data.items() %}
+        <tr>
+          {% if  value.__class__.__name__ == 'dict' %}
+            <td>{{ key }}</td>
+            <td>
+              <table>
+                <thead>
+                  <tr>
+                    <th colspan="2">{{ key }} Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for sub_key, sub_value in value.items() %}
+                    <tr>
+                      <td>{{ sub_key }}</td>
+                      <td>{{ sub_value }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          {% else %}
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</br>
+<a href="/">Back</a>
+</body>
+</html>

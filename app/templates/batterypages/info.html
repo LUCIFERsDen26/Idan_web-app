@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battery Information</title>
+  <style>
+    /* Optional CSS for styling (customize as needed) */
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+    .info-list li {
+      margin-bottom: 10px;
+    }
+    .info-list li span:first-child {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Battery Information</h1>
+  <ul class="info-list">
+    {% for key, value in data.items() %}
+      <li><span>{{ key }}:</span> {{ value }}</li>
+    {% endfor %}
+  </ul>
+</br>
+<a href="/">Back</a>
+</body>
+</html>

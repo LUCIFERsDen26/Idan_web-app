@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battery Control</title>
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% block body %}{% endblock %}
+</head>
+<body>
+  <h1>Battery Control</h1>
+  <form action="/battery/update" method="POST">
+
+    <div class="form-group">
+      <label for="start_stop_charging">Start/Stop Charging:</label>
+      <input type="text" id="start_stop_charging" name="Start/Stop Charging" placeholder="{{ parms['Start/Stop Charging'] }}">
+    </div>
+    <div class="form-group">
+      <label for="adjust_charging_rate">Adjust Charging Rate:</label>
+      <input type="number" id="adjust_charging_rate" name="Adjust Charging Rate" placeholder="{{ parms['Adjust Charging Rate'] }}">
+    </div>
+    <div class="form-group">
+      <label for="discharge_limit">Discharge Limit:</label>
+      <input type="number" id="discharge_limit" name="Discharge Limit" placeholder="{{ parms['Discharge Limit'] }}">
+    </div>
+    <div class="form-group">
+      <label for="soc_target">SoC Target:</label>
+      <input type="number" id="soc_target" name="SoC Target" placeholder="{{ parms['SoC Target'] }}">
+    </div>
+    <div class="form-group">
+      <label for="soc_balancing">SoC Balancing:</label>
+      <input type="checkbox" id="soc_balancing" name="SoC Balancing" {% if parms['SoC Balancing'] == 'True' %}checked{% endif %}>
+    </div>
+    <div class="form-group">
+      <label for="cooling_heating">Cooling/Heating:</label>
+      <select id="cooling_heating" name="Cooling/Heating">
+        <option value="auto" {% if parms['Cooling/Heating'] == 'auto' %}selected{% endif %}>Auto</option>
+        <option value="manual" {% if parms['Cooling/Heating'] != 'auto' %}selected{% endif %}>Manual</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="grid_connection_isolation">Grid Connection/Isolation:</label>
+      <input type="checkbox" id="grid_connection_isolation" name="Grid Connection/Isolation" {% if parms['Grid Connection/Isolation'] == 'True' %}checked{% endif %}>
+    </div>
+    <div class="form-group">
+      <label for="grid_frequency_regulation">Grid Frequency Regulation:</label>
+      <select id="grid_frequency_regulation" name="Grid Frequency Regulation">
+        <option value="adaptive" {% if parms['Grid Frequency Regulation'] == 'adaptive' %}selected{% endif %}>Adaptive</option>
+        <option value="fixed" {% if parms['Grid Frequency Regulation'] != 'adaptive' %}selected{% endif %}>Fixed</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="emergency_shutdown">Emergency Shutdown:</label>
+      <input type="checkbox" id="emergency_shutdown" name="Emergency Shutdown" {% if parms['Emergency Shutdown'] == 'True' %}checked{% endif %}>
+    </div>
+    <input type="submit" value="submit">
+  </form>
+</br>
+<a href="/">Back</a>
+</body>
+</html> 
