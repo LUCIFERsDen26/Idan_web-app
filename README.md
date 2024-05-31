@@ -18,7 +18,11 @@ cd casdoor-auth-server
 docker run -d -p 8000:8000 --name AuthServer casbin/casdoor-all-in-one
 ```
 ### Configure Casdoor
-Access the Casdoor web interface at ``` http://localhost:8000.```
+Access the Casdoor web interface at ``` http://localhost:8000```
+```
+username : admin
+password : 123
+```
 Set up your OAuth2 clients, user accounts, and permissions.
 
 ### Create an Environment File
