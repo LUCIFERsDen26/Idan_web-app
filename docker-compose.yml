@@ -1,0 +1,24 @@
+version: '3'
+services:
+  AuthServer:
+    image: casbin/casdoor-all-in-one
+    ports:
+      - "8000:8000"
+    container_name: AuthServer
+
+  WebApp_Concept:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - ServerSide_Session
+    ports:
+      - "5000:5000"
+    container_name: WebApp_Concept
+    detach: true
+
+  ServerSide_Session:
+    image: redis
+    ports:
+      - "6379:6379"
+    container_name: ServerSide_Session
