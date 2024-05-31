@@ -34,7 +34,7 @@ docker-compose up
 ```
 
 ### Access the Web App
-The web app will be available at ```http://localhost:5080```.
+The web app will be available at ```http://localhost:5000```.
 
 ### Contributing
 Contributions are welcome! Please open an issue or submit a pull request.
