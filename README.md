@@ -1,4 +1,5 @@
 # Idan_web-app
+
 This project demonstrates how to set up an authentication server using Casdoor in conjunction with Flask. The application leverages OAuth2 and OIDC authentication mechanisms. It adopts a microservices architecture and includes a web app component along with a Redis server for server-side session storage.
 
 ### Prerequisites
