@@ -22,7 +22,7 @@ Access the Casdoor web interface at ``` http://localhost:8000.```
 Set up your OAuth2 clients, user accounts, and permissions.
 
 ### Create an Environment File
-Copy the example environment file (example_ENV) and rename it to .env.
+Copy the example environment file ([.appenv](/.appenv)) and rename it to .env.
 Fill in the necessary environment variables.
 ### Start the Web App and Redis Server
 ```bash 
